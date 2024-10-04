@@ -20,3 +20,28 @@ while flag:
 
 
 print(i, ("%.4f" % x1), ("%.4f" % x2), ("%.4f" % x3))
+
+
+
+x1 = 0.245
+x2 = -0.215
+x3 = -0.455
+
+print('n x1    x2    x3')
+flag = True
+i = 0
+while flag:
+    print(i, ("%.4f" % x1), ("%.4f" % x2), ("%.4f" % x3))
+    a = x1
+    b = x2
+    c = x3
+    x1 = 0.495 * round(x1, 4) - 0.06 * round(x2, 4) - 0.315 * round(x3, 4) + 0.245
+    x2 = -0.005 * round(x1, 4) + 0.865 * round(x2, 4) + 0.065 * round(x3, 4) - 0.215
+    x3 = -0.095 * round(x1, 4) + 0.42 * round(x2, 4) - 0.185 * round(x3, 4) - 0.455
+    if abs(a - x1) < 0.0001 and abs(b - x2) < 0.0001 and abs(c - x3) < 0.0001:
+        flag = False
+
+    i += 1
+
+
+print(i - 1, ("%.3f" % x1), ("%.3f" % x2), ("%.3f" % x3))
