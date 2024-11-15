@@ -32,7 +32,7 @@ def get_index(x):
 
 def result_func(x):
     index = get_index(x)
-    q = (x - x_value[0]) / 0.005
+    q = (x - x_value[index]) / 0.005
     if index > (len(x_value) / 2):
         result = y_value[index] + q * dy[index] + ((q * (q - 1))/2)*pow(dy[index], 2) + ((q * (q - 1) * (q - 2))/2 * 3)*pow(dy[index], 3)
     else:
