@@ -1,3 +1,5 @@
+import math
+
 x_value = [0.15, 0.16, 0.17, 0.18, 0.19, 0.20, 0.21, 0.22, 0.23, 0.24, 0.25, 0.26]
 y_value = [4.4817, 4.9530, 5.4739, 6.0496, 6.6859, 7.3891, 8.1662, 9.0250, 9.9742, 11.0232, 12.1825, 13.4637]
 x1 = 0.1732
@@ -33,13 +35,14 @@ def get_index(x):
 def result_func(x):
     index = get_index(x)
     q = (x - x_value[index]) / 0.005
-    if index > (len(x_value) / 2):
-        result = y_value[index] + q * dy[index] + ((q * (q - 1))/2)*pow(dy[index], 2) + ((q * (q - 1) * (q - 2))/2 * 3)*pow(dy[index], 3)
+    if index < (len(x_value) / 2):
+        index -= 1
+        result = y_value[index] + q * dy[index] + ((q * (q - 1))/2)*pow(dy1[index], 2) + ((q * (q - 1) * (q - 2)) / 6) * pow(dy2[index], 2)
     else:
         index += 1
-        result = y_value[index] + q * sp[index - 1][index] + (q * (q + 1)/2)*pow(sp[index - 2][index], 2) + (q * (q + 1) * (q + 2) / 2*3)*pow(sp[index - 3][index], 3)
-
+        result = y_value[index] + q * dy[index - 1] + ((q * (q + 1))/2)*pow(dy1[index - 2], 2) + ((q * (q + 1) * (q + 2)) / 6) * pow(dy2[index - 2], 2)
     return result
 
 
-print(result_func(x1))
+print(f"f(x={x1}) = {result_func(x1)}")
+print(f"f(x={x2}) = {result_func(x2)}")
