@@ -2,21 +2,27 @@ import numpy as np
 
 
 def f(x):
-    return np.exp(x ** 2 + 1) + x
+    return x**2
 
 
-a = 0.2
-b = 1.2
-n = 10
-
-
-def rectangle_rule(f, a, b, n):
+def rect_int(func, a, b, n):
     h = (b - a) / n
-    x = np.linspace(a + h / 2, b - h / 2, n)
-    return h * np.sum(f(x))
+    res = []
+    ans = 0
+    for i in range(n):
+        left = a + h * i
+        right = a + h * (i + 1)
+        center = (left + right) / 2
+        ans += func(left) * h
+        res.append(func(left) * h)
+
+    print(res)
+    # for x in np.array(res):
+    #     print(f"{x:.5f}")
+    return ans
 
 
-def simpsons_rule(a, b, n):
+def simpson_int(a, b, n):
     h = (b - a) / n
     x = [a + i * h for i in range(n + 1)]
     y = [f(xi) for xi in x]
@@ -24,9 +30,15 @@ def simpsons_rule(a, b, n):
     return integral
 
 
-integral_rect = rectangle_rule(f, a, b, n)
-integral_simps = simpsons_rule(a, b, n)
+a = 0
+b = 1
+n = 10
 
-print("Формула прямоугольников:", integral_rect)
-print("Формула Симпсона:", integral_simps)
-print("Погрешность", abs(integral_rect - integral_simps))
+integral_rect = rect_int(f, a, b, n)
+integral_simps = simpson_int(a, b, n)
+
+
+print("  ")
+print("Формула прямоугольников:",  f"{integral_rect:.5f}")
+print("Формула Симпсона:", f"{integral_simps:.5f}")
+print("Погрешность", f"{abs(integral_rect - integral_simps):.5f}")
